@@ -11,7 +11,7 @@
  * governing permissions and limitations under the License. 
  */
 
-package com.appyvet.rangebar;
+package ch.poole.rangebar;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -76,10 +76,15 @@ public class ConnectingLine {
      * Draw the connecting line between for single slider.
      *
      * @param canvas     the Canvas to draw to
+     * @param margin the left margin
      * @param rightThumb the right thumb
-     * @param leftMargin the left margin
+     * @param connectToRight TODO
      */
-    public void draw(Canvas canvas, float leftMargin, PinView rightThumb) {
-        canvas.drawLine(leftMargin, mY, rightThumb.getX(), mY, mPaint);
+    public void draw(Canvas canvas, float margin, PinView rightThumb, boolean connectToRight) {
+    	if (connectToRight) {
+    		canvas.drawLine(rightThumb.getX(), mY, margin, mY, mPaint);
+    	} else {
+    		canvas.drawLine(margin, mY, rightThumb.getX(), mY, mPaint);
+    	}
     }
 }

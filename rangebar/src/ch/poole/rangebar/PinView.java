@@ -11,7 +11,7 @@
  * governing permissions and limitations under the License. 
  */
 
-package com.appyvet.rangebar;
+package ch.poole.rangebar;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -21,6 +21,7 @@ import android.graphics.LightingColorFilter;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.util.TypedValue;
 import android.view.View;
@@ -276,7 +277,9 @@ class PinView extends View {
             mTextPaint.getTextBounds(text, 0, text.length(), mBounds);
             mTextPaint.setTextAlign(Paint.Align.CENTER);
             mPin.setColorFilter(mPinFilter);
-            mPin.draw(canvas);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+            	mPin.draw(canvas);
+            }
             canvas.drawText(text,
                     mX, mY - mPinRadiusPx - mPinPadding + mTextYPadding,
                     mTextPaint);

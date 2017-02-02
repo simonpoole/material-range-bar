@@ -11,7 +11,7 @@
  * governing permissions and limitations under the License. 
  */
 
-package com.appyvet.rangebar;
+package ch.poole.rangebar;
 
 import android.view.View;
 

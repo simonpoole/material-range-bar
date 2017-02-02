@@ -11,7 +11,7 @@
  * governing permissions and limitations under the License. 
  */
 
-package com.appyvet.rangebar;
+package ch.poole.rangebar;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -38,6 +38,8 @@ public class Bar {
     private final float mY;
 
     private int mNumSegments;
+    
+    private int mVisibleTickInterval;
 
     private float mTickDistance;
 
@@ -54,6 +56,7 @@ public class Bar {
      * @param y            the y co-ordinate
      * @param length       the length of the bar in px
      * @param tickCount    the number of ticks on the bar
+     * @param visibleTickInterval number of ticks between actually drawn markers
      * @param tickHeightDP the height of each tick
      * @param tickColor    the color of each tick
      * @param barWeight    the weight of the bar
@@ -64,16 +67,17 @@ public class Bar {
             float y,
             float length,
             int tickCount,
+            int visibleTickInterval,
             float tickHeightDP,
             int tickColor,
-            float barWeight,
-            int barColor) {
+            float barWeight, int barColor) {
 
         mLeftX = x;
         mRightX = x + length;
         mY = y;
 
         mNumSegments = tickCount - 1;
+        mVisibleTickInterval = visibleTickInterval;
         mTickDistance = length / mNumSegments;
         mTickHeight = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 tickHeightDP,
@@ -140,7 +144,7 @@ public class Bar {
      * @param thumb the Thumb to find the nearest tick for
      * @return the zero-based index of the nearest tick
      */
-    public int getNearestTickIndex(PinView thumb) {
+	public int getNearestTickIndex(PinView thumb) {
 
         return (int) ((thumb.getX() - mLeftX + mTickDistance / 2f) / mTickDistance);
     }
@@ -170,7 +174,7 @@ public class Bar {
     public void drawTicks(Canvas canvas) {
 
         // Loop through and draw each tick (except final tick).
-        for (int i = 0; i < mNumSegments; i++) {
+        for (int i = 0; i < mNumSegments; i = i + mVisibleTickInterval) {
             final float x = i * mTickDistance + mLeftX;
             canvas.drawCircle(x, mY, mTickHeight, mTickPaint);
         }

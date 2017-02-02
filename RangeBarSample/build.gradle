@@ -7,7 +7,7 @@ dependencies {
 }
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion "23.0.3"
 
     defaultConfig {
         minSdkVersion 14
@@ -63,5 +63,5 @@ if (propFile.canRead()) {
 
 } else {
     println "RELEASE_BUILD: signing.properties not found"
-    android.buildTypes.release.signingProperties = null
+    //android.buildTypes.release.signingProperties = null
 }

@@ -4,6 +4,7 @@
         <attr name="tickStart" format="float" />
         <attr name="tickEnd" format="float" />
         <attr name="tickInterval" format="float" />
+        <attr name="visibleTickInterval" format="integer" />
         <attr name="tickHeight" format="dimension" />
         <attr name="tickColor" format="color" />
         <attr name="barWeight" format="dimension" />
@@ -20,6 +21,8 @@
         <attr name="temporaryPins" format="boolean" />
         <attr name="connectingLineWeight" format="dimension" />
         <attr name="connectingLineColor" format="reference|color" />
+        <attr name="connectToRight" format="boolean" />
+        <attr name="connectingLineEnabled" format="boolean" />
         <attr name="pinRadius" format="dimension" />
     </declare-styleable>
 
