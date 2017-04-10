@@ -1184,16 +1184,18 @@ public class RangeBar extends View {
 	private void createPins() {
         Context ctx = getContext();
         float yPos = getYPos();
-
+        
+        // 
+        float density = getResources().getDisplayMetrics().density;
+        float expandedPinRadius = mExpandedPinRadius / density;
         if (mIsRangeBar) {
             mLeftThumb = new PinView(ctx);
-            mLeftThumb.init(ctx, yPos, 0, mPinColor, mTextColor, mCircleSize, mCircleColor,
-                    mMinPinFont, mMaxPinFont, false);
+            mLeftThumb.init(ctx, yPos, mArePinsTemporary ? 0 : expandedPinRadius, mPinColor, mTextColor, mCircleSize, mCircleColor,
+                    mMinPinFont, mMaxPinFont, mArePinsTemporary);
         }
         mRightThumb = new PinView(ctx);
-        mRightThumb
-                .init(ctx, yPos, 0, mPinColor, mTextColor, mCircleSize, mCircleColor, mMinPinFont,
-                        mMaxPinFont, false);
+        mRightThumb.init(ctx, yPos, mArePinsTemporary ? 0 : expandedPinRadius, mPinColor, mTextColor, mCircleSize, mCircleColor, 
+        		mMinPinFont, mMaxPinFont, mArePinsTemporary);
 
         float marginLeft = getMarginLeft();
         float barLength = getBarLength();

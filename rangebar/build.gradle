@@ -1,10 +1,15 @@
+plugins {
+  id "com.jfrog.bintray" version "1.7"
+}
+
+apply plugin: 'eclipse'
 apply plugin: 'com.android.library'
 apply plugin: 'maven'
-apply plugin: 'signing'
-//apply from: '../maven_push.gradle'
+apply plugin: 'maven-publish'
 
-version = "1.3"
-group = "com.appyvet"
+
+
+version = "0.0.5"
 dependencies {
     compile 'com.android.support:support-v4:23.1.0'
 }
@@ -25,29 +30,65 @@ android {
             res.srcDirs = ['res']
         }
     }
+    
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
 }
+
+ext {
+    mainSource = file('src/ch/poole/rangebar')
+}
+
+//javadoc {
+//    source mainSource
+//}
+
+task sourcesJar(type: Jar) {
+	from mainSource
+	classifier = 'sources'
+}
+
+//task javadocJar(type: Jar, dependsOn: javadoc) {
+//	classifier = 'javadoc'
+//	from javadoc.destinationDir
+//	options.encoding = 'UTF-8'
+//}
 
 repositories {
     mavenCentral()
 }
 
-//signing {
-//    required { has("release") && gradle.taskGraph.hasTask("uploadArchives") }
-//    sign configurations.archives
-//}
-
-task publishLocal(type: Upload) {
-    configuration = configurations.archives
-    repositories.mavenDeployer {
-        repository(url: "file://$buildDir/repo")
+publishing {
+    publications {
+        rangebar(MavenPublication) {
+            groupId 'ch.poole'
+            artifactId 'rangebar'
+			artifact sourcesJar 
+			// artifact javadocJar 
+			artifact("$buildDir/outputs/aar/rangebar-release.aar")
+        }
     }
+}
 
-    task sourcesJar(type: Jar) {
-        classifier = 'sources'
-        from android.sourceSets.main.java.srcDirs
-    }
-
-    task generateJavadocs(type: Javadoc) {
-        source = android.sourceSets.main.java.srcDirs
+bintray {
+    user = System.getenv('BINTRAY_USER')
+    key = System.getenv('BINTRAY_KEY')
+    publications = ['rangebar']
+    pkg {
+        repo = 'div'
+        name = 'rangebar'
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/simonpoole/material-range-bar.git'
+        version {
+        	name = '0.0.5'
+			released  = new Date()
+			gpg {
+				sign = true //Determines whether to GPG sign the files. The default is false
+				passphrase = System.getenv('BINTRAY_PASSPHRASE')
+			}
+        }
     }
 }

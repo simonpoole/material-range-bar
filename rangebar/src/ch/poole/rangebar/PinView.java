@@ -23,6 +23,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 
