@@ -103,6 +103,8 @@ public class RangeBar extends View {
     private static final float DEFAULT_CIRCLE_SIZE_DP = 5;
 
     private static final float DEFAULT_BAR_PADDING_BOTTOM_DP = 24;
+    
+    private static final boolean DEFAULT_DRAG_ONLY = false;
 
     // Instance variables for all of the customizable attributes
 
@@ -145,6 +147,8 @@ public class RangeBar extends View {
     private float mMinPinFont = DEFAULT_MIN_PIN_FONT_SP;
 
     private float mMaxPinFont = DEFAULT_MAX_PIN_FONT_SP;
+    
+    private boolean mDragOnly = DEFAULT_DRAG_ONLY;
 
     // setTickCount only resets indices before a thumb has been pressed or a
     // setThumbIndices() is called, to correspond with intended usage
@@ -251,6 +255,7 @@ public class RangeBar extends View {
         bundle.putInt("BAR_COLOR", mBarColor);
         bundle.putFloat("CONNECTING_LINE_WEIGHT", mConnectingLineWeight);
         bundle.putInt("CONNECTING_LINE_COLOR", mConnectingLineColor);
+        bundle.putBoolean("CONNECT_TO_RIGHT", mConnectToRight);
 
         bundle.putFloat("CIRCLE_SIZE", mCircleSize);
         bundle.putInt("CIRCLE_COLOR", mCircleColor);
@@ -267,6 +272,8 @@ public class RangeBar extends View {
 
         bundle.putFloat("MIN_PIN_FONT", mMinPinFont);
         bundle.putFloat("MAX_PIN_FONT", mMaxPinFont);
+        
+        bundle.putBoolean("DRAG_ONLY", mDragOnly);
 
         return bundle;
     }
@@ -291,7 +298,8 @@ public class RangeBar extends View {
             mCircleColor = bundle.getInt("CIRCLE_COLOR");
             mConnectingLineWeight = bundle.getFloat("CONNECTING_LINE_WEIGHT");
             mConnectingLineColor = bundle.getInt("CONNECTING_LINE_COLOR");
-
+            mConnectToRight = bundle.getBoolean("CONNECT_TO_RIGHT");
+            
             mThumbRadiusDP = bundle.getFloat("THUMB_RADIUS_DP");
             mExpandedPinRadius = bundle.getFloat("EXPANDED_PIN_RADIUS_DP");
             mPinPadding = bundle.getFloat("PIN_PADDING");
@@ -305,6 +313,8 @@ public class RangeBar extends View {
 
             mMinPinFont = bundle.getFloat("MIN_PIN_FONT");
             mMaxPinFont = bundle.getFloat("MAX_PIN_FONT");
+            
+            mDragOnly = bundle.getBoolean("DRAG_ONLY");
 
             setRangePinsByIndices(mLeftIndex, mRightIndex);
             super.onRestoreInstanceState(bundle.getParcelable("instanceState"));
@@ -1144,6 +1154,8 @@ public class RangeBar extends View {
             mMaxPinFont = ta.getDimension(R.styleable.RangeBar_pinMaxFont,
                     DEFAULT_MAX_PIN_FONT_SP * density);
 
+            mDragOnly = ta.getBoolean(R.styleable.RangeBar_dragOnly, DEFAULT_DRAG_ONLY);
+            
             mIsRangeBar = ta.getBoolean(R.styleable.RangeBar_rangeBar, true);
         } finally {
             ta.recycle();
@@ -1321,7 +1333,7 @@ public class RangeBar extends View {
 
             releasePin(mRightThumb);
 
-        } else {
+        } else if (!mDragOnly)  {
 
             float leftThumbXDistance = mIsRangeBar ? Math.abs(mLeftThumb.getX() - x) : 0;
             float rightThumbXDistance = Math.abs(mRightThumb.getX() - x);

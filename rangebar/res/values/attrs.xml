@@ -24,6 +24,7 @@
         <attr name="connectToRight" format="boolean" />
         <attr name="connectingLineEnabled" format="boolean" />
         <attr name="pinRadius" format="dimension" />
+        <attr name="dragOnly" format="boolean" />
     </declare-styleable>
 
 </resources>

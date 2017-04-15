@@ -9,7 +9,7 @@ apply plugin: 'maven-publish'
 
 
 
-version = "0.0.5"
+version = "0.0.7"
 dependencies {
     compile 'com.android.support:support-v4:23.1.0'
 }
@@ -83,7 +83,7 @@ bintray {
         licenses = ['Apache-2.0']
         vcsUrl = 'https://github.com/simonpoole/material-range-bar.git'
         version {
-        	name = '0.0.5'
+        	name = "${project.version}"
 			released  = new Date()
 			gpg {
 				sign = true //Determines whether to GPG sign the files. The default is false
