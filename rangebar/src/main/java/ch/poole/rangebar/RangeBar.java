@@ -417,7 +417,6 @@ public class RangeBar extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-
         super.onDraw(canvas);
 
         mBar.draw(canvas);
@@ -426,7 +425,13 @@ public class RangeBar extends View {
             if (drawTicks) {
                 mBar.drawTicks(canvas);
             }
-            mLeftThumb.draw(canvas);
+            if (mLeftThumb.isPressed()) { // draw the pressed thumb on top
+            	mRightThumb.draw(canvas);
+            	mLeftThumb.draw(canvas);
+            } else {
+            	mLeftThumb.draw(canvas);
+            	mRightThumb.draw(canvas);
+            }
         } else {
         	if (mConnectingLineEnabled) {
         		if (mConnectToRight) {
@@ -438,9 +443,8 @@ public class RangeBar extends View {
             if (drawTicks) {
                 mBar.drawTicks(canvas);
             }
+            mRightThumb.draw(canvas);
         }
-        mRightThumb.draw(canvas);
-
     }
 
     @Override
@@ -1303,11 +1307,8 @@ public class RangeBar extends View {
     private void onActionDown(float x, float y) {
         if (mIsRangeBar) {
             if (!mRightThumb.isPressed() && mLeftThumb.isInTargetZone(x, y)) {
-
                 pressPin(mLeftThumb);
-
             } else if (!mLeftThumb.isPressed() && mRightThumb.isInTargetZone(x, y)) {
-
                 pressPin(mRightThumb);
             }
         } else {
@@ -1433,17 +1434,17 @@ public class RangeBar extends View {
         }
         if (mArePinsTemporary) {
         	if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            ValueAnimator animator = ValueAnimator.ofFloat(0, mExpandedPinRadius); 
-            animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        		ValueAnimator animator = ValueAnimator.ofFloat(0, mExpandedPinRadius); 
+        		animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 
-                @Override
-                public void onAnimationUpdate(ValueAnimator animation) {
-                    mThumbRadiusDP = (Float) (animation.getAnimatedValue());
-                    thumb.setSize(mThumbRadiusDP, mPinPadding * animation.getAnimatedFraction());
-                    invalidate();
-                }
-            });
-            animator.start();
+        			@Override
+        			public void onAnimationUpdate(ValueAnimator animation) {
+        				mThumbRadiusDP = (Float) (animation.getAnimatedValue());
+        				thumb.setSize(mThumbRadiusDP, mPinPadding * animation.getAnimatedFraction());
+        				invalidate();
+        			}
+        		});
+        		animator.start();
         	} else { // no animation
         		thumb.setSize(mThumbRadiusDP, mPinPadding);
         	}

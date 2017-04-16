@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.appyvet.rangebarsample.colorpicker;
+package ch.poole.rangebarsample.colorpicker;
 
 import android.graphics.Color;
 import android.graphics.PorterDuff;

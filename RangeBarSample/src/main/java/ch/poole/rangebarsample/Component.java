@@ -1,5 +1,4 @@
-
-package com.appyvet.rangebarsample;
+package ch.poole.rangebarsample;
 
 /**
  * Enumeration of the components to be changed in colorChanged. Only needed for

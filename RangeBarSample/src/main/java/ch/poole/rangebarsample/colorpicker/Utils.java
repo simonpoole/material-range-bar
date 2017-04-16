@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.appyvet.rangebarsample.colorpicker;
+package ch.poole.rangebarsample.colorpicker;
 
-import com.appyvet.rangebarsample.R;
+import ch.poole.rangebarsample.R;
 
 import android.content.Context;
 import android.content.res.Configuration;

@@ -1,9 +1,8 @@
+package ch.poole.rangebarsample;
 
-package com.appyvet.rangebarsample;
-
-import com.appyvet.rangebar.RangeBar;
-import com.appyvet.rangebarsample.colorpicker.ColorPickerDialog;
-import com.appyvet.rangebarsample.colorpicker.Utils;
+import ch.poole.rangebar.RangeBar;
+import ch.poole.rangebarsample.colorpicker.ColorPickerDialog;
+import ch.poole.rangebarsample.colorpicker.Utils;
 
 import android.app.Activity;
 import android.os.Bundle;
