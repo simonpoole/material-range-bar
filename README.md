@@ -1,7 +1,7 @@
 MaterialRangeBar
 ================
 
-This is a fork of MaterialRangeBar v1.3 that in turn is a fork of https://github.com/edmodo/range-bar that adds some basic material styling, as well as start and end values, values as floats and some other things. It is aiming to mimic this:
+This is a fork of MaterialRangeBar v1.3 https://github.com/oli107/material-range-bar that in turn is a fork of https://github.com/edmodo/range-bar that adds some basic material styling, as well as start and end values, values as floats and some other things. It is aiming to mimic this:
 
 http://www.google.com/design/spec/components/sliders.html
 
@@ -125,7 +125,7 @@ TODO
 
 Demo
 =======
-[Get it from the Google Play Store](https://play.google.com/store/apps/details?id=com.appyvet.rangebarsample)
+... not provided for this fork ....
 
 
 Installation
@@ -135,12 +135,13 @@ Installation
 
 ```groovy
 dependencies {
-    compile 'com.appyvet:materialrangebar:1.3'
+    compile "ch.poole:rangebar:0.1.1"
 }
 ```
 
 License
 =======
+Copyright 2016, 2017 Simon Poole
 Copyright 2015, AppyVet, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this work except in compliance with the License.
