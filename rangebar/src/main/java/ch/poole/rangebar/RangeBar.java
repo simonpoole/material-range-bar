@@ -623,9 +623,9 @@ public class RangeBar extends View {
     }
     
     /**
-     * 
+     * Set the interval for visible ticks
      *
-     * @param tickInterval Integer specifying the number of ticks.
+     * @param visibleTickInterval Integer specifying the number of visible ticks.
      */
     public void setVisibleTickInterval(int visibleTickInterval) {
             mVisibleTickInterval = visibleTickInterval;
@@ -797,8 +797,8 @@ public class RangeBar extends View {
     }
     
     /**
-     * Enable/diable the connecting line
-     * @param enabled
+     * Enable/disable the connecting line
+     * @param enabled	if true the connecting line is shown, else not
      */
     public void setConnectingLineEnabled(boolean enabled) {
 

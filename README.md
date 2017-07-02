@@ -1,5 +1,5 @@
 MaterialRangeBar
-=======
+================
 
 This is a fork of MaterialRangeBar v1.3 that in turn is a fork of https://github.com/edmodo/range-bar that adds some basic material styling, as well as start and end values, values as floats and some other things. It is aiming to mimic this:
 
