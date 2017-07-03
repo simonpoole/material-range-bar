@@ -6,7 +6,7 @@ apply plugin: 'eclipse'
 apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
 
-version = "0.1.1"
+version = "0.1.2"
 dependencies {
     compile 'com.android.support:support-v4:23.1.0'
 }
@@ -28,7 +28,9 @@ android {
 }
 
 ext {
-    mainSource = file('src/ch/poole/rangebar')
+	// hardwiring this is ugly but it does work
+    releaseSource = file('src/main/java/ch/poole/rangebar')
+    releaseJavadoc = file('build/docs/javadoc')
 }
 
 android.libraryVariants.all { variant ->
@@ -45,14 +47,12 @@ android.libraryVariants.all { variant ->
 }
 
 task javadocJar(type: Jar, dependsOn: 'generateReleaseJavadoc') {
-	doLast {
-    	from generateReleaseJavadoc.destinationDir
-	}
+	from releaseJavadoc
 	classifier = 'javadoc'
 }
 
 task sourcesJar(type: Jar) {
-	from mainSource
+	from releaseSource
 	classifier = 'sources'
 }
 
