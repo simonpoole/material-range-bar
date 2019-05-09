@@ -1378,6 +1378,8 @@ public class RangeBar extends View {
                             getPinValue(mRightIndex));
                 }
             }
+        } else {
+            performClick();
         }
     }
 
