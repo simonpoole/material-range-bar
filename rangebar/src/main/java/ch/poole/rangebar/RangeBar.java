@@ -467,13 +467,9 @@ public class RangeBar extends View {
             mLastY = event.getY();
             onActionDown(event.getX(), event.getY());
             return true;
-
-        case MotionEvent.ACTION_UP:
-            this.getParent().requestDisallowInterceptTouchEvent(false);
-            onActionUp(event.getX(), event.getY());
-            return true;
-
+            
         case MotionEvent.ACTION_CANCEL:
+        case MotionEvent.ACTION_UP:
             this.getParent().requestDisallowInterceptTouchEvent(false);
             onActionUp(event.getX(), event.getY());
             return true;

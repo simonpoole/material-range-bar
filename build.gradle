@@ -1,15 +1,18 @@
 buildscript {
     repositories {
+        google()
         mavenCentral()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath 'com.github.ksoichiro:gradle-eclipse-aar-plugin:0.3.1'
     }
 }
 
 allprojects {
     repositories {
+        google()
         mavenCentral()
         jcenter()
     }

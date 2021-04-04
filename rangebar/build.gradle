@@ -8,25 +8,29 @@ apply plugin: 'maven-publish'
 
 version = "0.1.5"
 dependencies {
-    compile 'com.android.support:support-v4:23.1.0'
+    implementation 'com.android.support:support-v4:23.1.0'
 }
 
-apply from: 'https://raw.githubusercontent.com/simonpoole/gradle-tasks/master/eclipse-android'
+apply from: 'https://raw.githubusercontent.com/simonpoole/gradle-tasks/master/eclipse-android-3'
 
 android {
 
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion 28
 
     defaultConfig {
-        minSdkVersion 12
-        targetSdkVersion 25
+       minSdkVersion 14
+       targetSdkVersion 28
     }
     
     buildTypes {
         release {
             minifyEnabled false
         }
+    }
+    
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -36,18 +40,18 @@ ext {
     releaseJavadoc = file('build/docs/javadoc')
 }
 
-android.libraryVariants.all { variant ->
-  task("generate${variant.name.capitalize()}Javadoc", type: Javadoc) {
-    description "Generates Javadoc for $variant.name."
-    group "Documentation"
-    source = variant.javaCompile.source
-    classpath = files(variant.javaCompile.classpath.files) + files(android.bootClasspath) + files(variant.javaCompile.destinationDir)
-    options.links("http://docs.oracle.com/javase/7/docs/api/");
-    options.links("http://d.android.com/reference/");
-    exclude '**/BuildConfig.java'
-    exclude '**/R.java'
-  }
-}
+//android.libraryVariants.all { variant ->
+//  task("generate${variant.name.capitalize()}Javadoc", type: Javadoc) {
+//    description "Generates Javadoc for $variant.name."
+//    group "Documentation"
+//    source = variant.javaCompile.source
+//    classpath = files(variant.javaCompile.classpath.files) + files(android.bootClasspath) + files(variant.javaCompile.destinationDir)
+//    options.links("http://docs.oracle.com/javase/7/docs/api/");
+//    options.links("http://d.android.com/reference/");
+//    exclude '**/BuildConfig.java'
+//    exclude '**/R.java'
+//  }
+//}
 
 task javadocJar(type: Jar, dependsOn: 'generateReleaseJavadoc') {
 	from releaseJavadoc
@@ -61,6 +65,14 @@ task sourcesJar(type: Jar) {
 
 repositories {
     mavenCentral()
+}
+
+task replaceVersionInREADME {
+    doLast {
+        ant.replaceregexp(match:'com\\.acme\\:mylibrary\\:([0-9\\.]+)', replace:"com.acme:mylibrary:${version}", flags:'g', byline:true) {
+            fileset(dir: '.', includes: 'README.md')
+        }
+    }
 }
 
 publishing {
