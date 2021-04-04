@@ -2,7 +2,7 @@ apply plugin: 'android'
 apply plugin: 'eclipse'
 
 dependencies {
-    implementation project(':rangebar')
+    implementation project(path: ':rangebar', configuration: 'default')
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 }

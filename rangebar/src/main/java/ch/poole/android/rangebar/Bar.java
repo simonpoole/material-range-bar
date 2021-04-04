@@ -11,7 +11,7 @@
  * governing permissions and limitations under the License. 
  */
 
-package ch.poole.rangebar;
+package ch.poole.android.rangebar;
 
 import android.content.Context;
 import android.graphics.Canvas;

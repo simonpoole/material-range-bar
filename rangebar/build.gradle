@@ -1,12 +1,8 @@
-plugins {
-  id "com.jfrog.bintray" version "1.7"
-}
-
 apply plugin: 'eclipse'
 apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
 
-version = "0.1.5"
+version = "0.1.6"
 dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 }
@@ -40,29 +36,6 @@ ext {
     releaseJavadoc = file('build/docs/javadoc')
 }
 
-//android.libraryVariants.all { variant ->
-//  task("generate${variant.name.capitalize()}Javadoc", type: Javadoc) {
-//    description "Generates Javadoc for $variant.name."
-//    group "Documentation"
-//    source = variant.javaCompile.source
-//    classpath = files(variant.javaCompile.classpath.files) + files(android.bootClasspath) + files(variant.javaCompile.destinationDir)
-//    options.links("http://docs.oracle.com/javase/7/docs/api/");
-//    options.links("http://d.android.com/reference/");
-//    exclude '**/BuildConfig.java'
-//    exclude '**/R.java'
-//  }
-//}
-
-task javadocJar(type: Jar, dependsOn: 'generateReleaseJavadoc') {
-	from releaseJavadoc
-	classifier = 'javadoc'
-}
-
-task sourcesJar(type: Jar) {
-	from releaseSource
-	classifier = 'sources'
-}
-
 repositories {
     mavenCentral()
 }
@@ -75,34 +48,4 @@ task replaceVersionInREADME {
     }
 }
 
-publishing {
-    publications {
-        rangebar(MavenPublication) {
-            groupId 'ch.poole'
-            artifactId 'rangebar'
-			artifact sourcesJar 
-			artifact javadocJar 
-			artifact("$buildDir/outputs/aar/rangebar-release.aar")
-        }
-    }
-}
-
-bintray {
-    user = System.getenv('BINTRAY_USER')
-    key = System.getenv('BINTRAY_KEY')
-    publications = ['rangebar']
-    pkg {
-        repo = 'div'
-        name = 'rangebar'
-        licenses = ['Apache-2.0']
-        vcsUrl = 'https://github.com/simonpoole/material-range-bar.git'
-        version {
-        	name = "${project.version}"
-			released  = new Date()
-			gpg {
-				sign = true //Determines whether to GPG sign the files. The default is false
-				passphrase = System.getenv('BINTRAY_PASSPHRASE')
-			}
-        }
-    }
-}
+apply from: 'https://raw.githubusercontent.com/simonpoole/gradle-tasks/master/publish-on-sonatype-android'

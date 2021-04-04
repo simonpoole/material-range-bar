@@ -36,7 +36,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
-package ch.poole.rangebar;
+package ch.poole.android.rangebar;
 
 import java.util.HashMap;
 
@@ -60,7 +60,7 @@ import android.view.View;
  * Whereas the thumb for the SeekBar can be dragged to any position in the bar, the RangeBar only allows its thumbs to
  * be dragged to discrete positions (denoted by tick marks) in the bar. When released, a RangeBar thumb will snap to the
  * nearest tick mark. This version is forked from edmodo range bar https://github.com/edmodo/range-bar.git Clients of
- * the RangeBar can attach a {@link ch.poole.rangebar.RangeBar.OnRangeBarChangeListener} to be notified when the pins
+ * the RangeBar can attach a {@link ch.poole.android.rangebar.RangeBar.OnRangeBarChangeListener} to be notified when the pins
  * have been moved.
  */
 public class RangeBar extends View {

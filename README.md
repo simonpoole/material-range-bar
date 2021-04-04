@@ -135,7 +135,7 @@ Installation
 
 ```groovy
 dependencies {
-    compile "ch.poole:rangebar:0.1.1"
+    compile "ch.poole.android:rangebar:0.1.6"
 }
 ```
 
